@@ -1,7 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+10.times do
+    User.create(
+        username: Faker::Artist.name,
+        password_digest:  123,
+        email:  Faker::Artist.name+'@gmail.com',
+        first_name: Faker::Artist.name
+    )
+end
+
+5.times do
+    Post.create(
+        post: Faker::Lorem.paragraphs,
+        image_url: Faker::LoremFlickr.pixelated_image(size: "50x60", search_terms: ['cats'])
+    )
+end
+
+10.times do
+    Comment.create(
+        comment: Faker::Quote.famous_last_words,
+        user_id: rand(1..9),
+        post_id: rand(1..5)
+    )
+end
+
+puts "Done seeding!"
